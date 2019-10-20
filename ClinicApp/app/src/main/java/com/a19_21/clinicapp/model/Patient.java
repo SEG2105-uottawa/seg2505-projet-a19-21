@@ -4,7 +4,7 @@ public class Patient extends User{
 
     private int nbReviews;
 
-    public Patient(String username, String email, String password) {
-        super(username, email, password);
+    public Patient(String id, String username, String email, String password) {
+        super(id , username, email, password);
     }
 }

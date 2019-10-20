@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signInBtn;
 
     // Firebase Authentication
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth ;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "Log in";
 
@@ -74,20 +74,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // SENDS THE USER TO SIGN UP
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToSignIn = new Intent(MainActivity.this, SignInActivity.class);
+                startActivity(goToSignIn);
+            }
+        });
     }
+
+
 
     private void login() {
 
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
 
+        // SIGN IN EXISTING USERS //
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
 
         {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task)
             {
-                Log.d(TAG, " Verification : signIn With Email:onComplete:" + task.isSuccessful());
+                Log.d(TAG, " Vérification : signIn With Email : " + task.isSuccessful());
                 //  If sign in succeeds i.e if task.isSuccessful(); returns true then the auth state listener will be notified and logic to handle the
                 // signed in user can be handled in the listener.
                 Intent intent = new Intent(MainActivity.this , WelcomeActivity.class);
@@ -113,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 
     /*@Override
     public void onStart() {

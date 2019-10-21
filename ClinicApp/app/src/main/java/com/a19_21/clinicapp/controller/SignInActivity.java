@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.a19_21.clinicapp.R;
+import com.a19_21.clinicapp.model.Admin;
 import com.a19_21.clinicapp.model.Employee;
 import com.a19_21.clinicapp.model.Patient;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -94,6 +95,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
     private void signUp() {
 
         System.out.println("Enter Sign up");
+        final String username = usernameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
 
@@ -131,9 +133,8 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         String password = passwordInput.getText().toString();
         String userType = typeAccount.getSelectedItem().toString();
 
-        // Generates an id for the user
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        //String id = databaseUsers.push().getKey();
+
 
 
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
@@ -141,15 +142,20 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
             // Creates different accounts depending on the type
             if (userType.equals("Employee")){
                 System.out.println("Enter Employee");
-                Employee employee = new Employee(id,username, email, password);
+                Employee employee = new Employee(id,username, email, password, userType);
                 databaseUsers.child(id).setValue(employee);
 
                 return true;
 
             } else if (userType.equals("Patient")) {
-                Patient patient = new Patient(id,username, email, password);
+                Patient patient = new Patient(id, username, email, password, userType);
 
                 databaseUsers.child(id).setValue(patient);
+                return true;
+            } else if (userType.equals("Admin")){
+                Admin admin = new Admin(id, username, email, password, userType);
+
+                databaseUsers.child(id).setValue(admin);
                 return true;
 
             } else {

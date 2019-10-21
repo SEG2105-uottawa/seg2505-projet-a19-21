@@ -4,5 +4,6 @@
     <string-array name="typeAccountsArray">
         <item>Employee</item>
         <item>Patient</item>
+        <item>Admin</item>
     </string-array>
 </resources>

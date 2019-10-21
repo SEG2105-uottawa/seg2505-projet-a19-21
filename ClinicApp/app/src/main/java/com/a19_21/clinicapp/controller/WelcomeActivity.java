@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.a19_21.clinicapp.R;
 import com.a19_21.clinicapp.model.Employee;
 import com.a19_21.clinicapp.model.Patient;
-import com.a19_21.clinicapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -37,35 +37,33 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
         greetingTxt = (TextView) findViewById(R.id.activity_welcome_greeting_txt);
-        displayWelcome();
+        greetingTxt.setText("Welcome !");
+        //displayWelcome();
 
 
     }
 
+    /*
     private void displayWelcome() {
+
         databaseUsers.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 User user = dataSnapshot.getValue(User.class);
-                String name = user.getUsername();
+                String role;
 
-                if (user instanceof Employee) {
-                    String role = "Employee";
-                } else if (user instanceof Patient) {
-                    String role = "Patient";
-                } else {
-                    String role = "Admin";
-                }
+                greetingTxt.setText(user);
 
-                greetingTxt.setText("Welcome " + name + ", you're connected as " + role + ".");
+            }
 
-                @Override
-                public void onCancelled (@NonNull DatabaseError databaseError){
-
-                }
+            @Override
+            public void onCancelled (@NonNull DatabaseError databaseError){
+                System.out.println("Read failed :" + databaseError.getCode());
             }
 
         });
     }
+     */
 }

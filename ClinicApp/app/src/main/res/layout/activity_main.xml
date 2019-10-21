@@ -68,11 +68,10 @@
         android:id="@+id/activity_main_sign_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:text="Sign in"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="50dp"
         android:gravity="center"
-        />
+        android:text="Sign up" />
 
 
 

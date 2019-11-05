@@ -17,9 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.a19_21.clinicapp.R;
-import com.a19_21.clinicapp.model.Admin;
-import com.a19_21.clinicapp.model.Employee;
-import com.a19_21.clinicapp.model.Patient;
+import com.a19_21.clinicapp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -39,7 +37,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
     // Firebase Authentication
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "Sign up";
 
     // Firebase Database
@@ -94,7 +91,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
     private void signUp() {
 
-        System.out.println("Enter Sign up");
         final String username = usernameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
@@ -123,7 +119,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                     }
                 });
 
-
     }
 
     private boolean addNewUser(){
@@ -135,32 +130,11 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
-
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-
-            // Creates different accounts depending on the type
-            if (userType.equals("Employee")){
-                System.out.println("Enter Employee");
-                Employee employee = new Employee(id,username, email, password, userType);
-                databaseUsers.child(id).setValue(employee);
-
-                return true;
-
-            } else if (userType.equals("Patient")) {
-                Patient patient = new Patient(id, username, email, password, userType);
-
-                databaseUsers.child(id).setValue(patient);
-                return true;
-            } else if (userType.equals("Admin")){
-                Admin admin = new Admin(id, username, email, password, userType);
-
-                databaseUsers.child(id).setValue(admin);
-                return true;
-
-            } else {
-                return false;
-            }
+            // Creates different account types
+            User user = new User(id, username, email, password, userType);
+            databaseUsers.child(id).setValue(user);
+            return true;
 
         } else {
             Toast.makeText(SignInActivity.this, "Information missing",

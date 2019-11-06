@@ -40,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
         firebaseUser = firebaseAuth.getCurrentUser();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("us                System.out.println(user.getUsername());er/"+firebaseUser.getUid());
+        databaseReference = firebaseDatabase.getReference("user/"+firebaseUser.getUid());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override

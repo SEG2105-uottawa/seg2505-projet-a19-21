@@ -88,6 +88,8 @@ public class ManageUsersActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         DatabaseReference userToDelete = FirebaseDatabase.getInstance().getReference("user").child(userID);
                         userToDelete.removeValue();
+                        Toast.makeText(ManageUsersActivity.this, "User deleted",
+                                Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton("MERCY", new DialogInterface.OnClickListener() {

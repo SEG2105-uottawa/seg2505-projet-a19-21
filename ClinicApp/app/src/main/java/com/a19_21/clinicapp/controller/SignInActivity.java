@@ -91,7 +91,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
     private void signUp() {
 
-        final String username = usernameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
 

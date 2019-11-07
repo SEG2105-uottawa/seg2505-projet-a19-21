@@ -1,5 +1,6 @@
 package com.a19_21.clinicapp.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -17,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class WelcomeActivity extends AppCompatActivity {
-
 
 
     private TextView greetingTxt;
@@ -45,10 +45,17 @@ public class WelcomeActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 User user = dataSnapshot.getValue(User.class);
-                System.out.println("------------- TEST GET USERNAME ---------------");
-                System.out.println(user.getUsername());
-                greetingTxt.setText("Welcome "+user.getUsername()+", you're connected as "+user.getType());
+
+                // Si le user est un Admin, on l'envoie directement vers AdminActivity
+                if (user.getType().equals("Admin")) {
+                    Intent goToAdmin = new Intent(WelcomeActivity.this, AdminActivity.class);
+                    startActivity(goToAdmin);
+                // Sinon, il a le message Texte
+                } else {
+                    greetingTxt.setText("Welcome "+user.getUsername()+", you're connected as "+user.getType());
+                }
             }
 
             @Override

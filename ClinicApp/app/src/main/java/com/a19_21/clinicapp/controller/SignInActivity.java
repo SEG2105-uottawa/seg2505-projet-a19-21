@@ -99,7 +99,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            System.out.println("Enter Task Successful");
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -114,7 +113,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                                     Toast.LENGTH_SHORT).show();
                         }
 
-                        // ...
+                        // Il faudrait faire un catch pour e-mail non valide et mot de passe trop court
                     }
                 });
 

@@ -7,22 +7,14 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String id;
+    private String userId;
     private String type;
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    private int accountID; // get from Firebase
+    // private int accountID; // get from Firebase
     //private TimeStamp creationDate;
 
     public User(String id, String username, String email, String password, String type){
-        this.id = id;
+        this.userId = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -30,7 +22,14 @@ public class User {
         // this.creationDate = get current time and store it
     }
 
-    public User(){
+    public User(){}
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String id) {
+        this.userId = id;
     }
 
     public String getUsername() {
@@ -55,6 +54,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @NonNull

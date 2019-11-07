@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.a19_21.clinicapp.R;
 import com.a19_21.clinicapp.model.User;
@@ -37,27 +39,15 @@ public class ManageUsersActivity extends AppCompatActivity {
 
         usersList = new ArrayList<>();
         usersListView = (ListView) findViewById(R.id.manage_users_userslistview);
+
         usersDatabase = FirebaseDatabase.getInstance().getReference("user");
 
-        usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        usersListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ManageUsersActivity.this);
-
-                builder.setTitle("Warning !");
-                builder.setMessage("Are you sure you want to delete this user ? You're not gonna regret ? Like, sure SURE ?");
-                builder.setPositiveButton("FINISH HIM", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // DELETE HIM
-                    }
-                });
-                builder.setNegativeButton("MERCY", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // RETURN TO MANAGE USERS
-                    }
-                });
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                User user = usersList.get(position);
+                deleteUser(user.getUserId());
+                return true;
             }
         });
     }
@@ -84,5 +74,28 @@ public class ManageUsersActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void deleteUser(String id){
+
+        final String userID = id;
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ManageUsersActivity.this);
+        builder.setTitle("Warning !")
+                .setMessage("Are you sure you want to delete this user ? You're not gonna regret ? Like, sure SURE ?")
+                .setPositiveButton("FINISH HIM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DatabaseReference userToDelete = FirebaseDatabase.getInstance().getReference("user").child(userID);
+                        userToDelete.removeValue();
+                    }
+                })
+                .setNegativeButton("MERCY", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .create()
+                .show();
     }
 }

@@ -2,6 +2,7 @@ package com.a19_21.clinicapp.model;
 
 public class Service {
 
+    private String id;
     private String name;
     private String description;
     private double fee;
@@ -17,6 +18,14 @@ public class Service {
 
     public String getName() {
         return name;
+    }
+
+    public String getServiceId() {
+        return id;
+    }
+
+    public void setServiceId(String id) {
+        this.id = id;
     }
 
     public void setName(String name) {

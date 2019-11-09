@@ -13,7 +13,6 @@ public class Service {
         this.name = name;
         this.description = description;
         this.fee = 0;
-        this.clinicList = null;
     }
 
     public String getName() {
@@ -52,7 +51,4 @@ public class Service {
         return clinicList;
     }
 
-    public void setClinicList(Clinic[] clinicList) {
-        this.clinicList = clinicList;
-    }
 }

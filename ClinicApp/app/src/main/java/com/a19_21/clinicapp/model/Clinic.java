@@ -1,32 +1,37 @@
 package com.a19_21.clinicapp.model;
 
+import java.sql.Time;
+
 public class Clinic {
 
-    private String id;
+    private String clinicId;
     private String clinicName;
     private String phoneNumber;
-    private String hoursOfOperation;
+    private Time[] startHours = new Time[7];
+    private Time[] closeHours = new Time[7];
 
-    private Adress adress;
+    private String selfEmployeeID;
+    private String selfAdressID;
+    //private rating;
 
-    /*
+
     private Service[] services;
     private Review[] reviews;
-     */
 
-    public Clinic(String id, String clinicName, String phoneNumber, String hoursOfOperation){
-        this.id = id;
+
+    public Clinic(String id, String clinicName, String employeeID){
+        this.clinicId = id;
         this.clinicName = clinicName;
-        this.phoneNumber = phoneNumber;
+        this.selfEmployeeID = employeeID;
     }
 
-    /*public String getId() {
-        return id;
+    public String getClinicId() {
+        return clinicId;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }*/
+    public void setClinicId(String id) {
+        this.clinicId = id;
+    }
 
     public String getClinicName() {
         return clinicName;
@@ -44,11 +49,58 @@ public class Clinic {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getHoursOfOperation() {
-        return hoursOfOperation;
+    public String getAdressID() {
+        return selfAdressID;
     }
 
-    public void setHoursOfOperation(String hoursOfOperation) {
-        this.hoursOfOperation = hoursOfOperation;
+    public void setAdressID(String adressID) {
+        this.selfAdressID = adressID;
     }
+
+    public String getEmployeeID() {
+        return selfEmployeeID;
+    }
+
+    public void setEmployeeID(String selfEmployeeID) {
+        this.selfEmployeeID = selfEmployeeID;
+    }
+
+    // --------------------------- SET HOURS OF OPERATION --------------------------------- //
+
+    public void setMondayHours(Time start, Time close) {
+        this.startHours[0] = start;
+        this.closeHours[0] = close;
+    }
+
+    public void setTuesdayHours(Time start, Time close) {
+        this.startHours[1] = start;
+        this.closeHours[1] = close;
+    }
+
+    public void setWednesdayHours(Time start, Time close) {
+        this.startHours[2] = start;
+        this.closeHours[2] = close;
+    }
+
+    public void setThursdayHours(Time start, Time close) {
+        this.startHours[3] = start;
+        this.closeHours[3] = close;
+    }
+
+    public void setFridayHours(Time start, Time close) {
+        this.startHours[4] = start;
+        this.closeHours[4] = close;
+    }
+
+    public void setSaturdayHours(Time start, Time close) {
+        this.startHours[5] = start;
+        this.closeHours[5] = close;
+    }
+
+    public void setSundayHours(Time start, Time close) {
+        this.startHours[6] = start;
+        this.closeHours[6] = close;
+    }
+
+    // -------------------------------------------------------------------------------------//
 }

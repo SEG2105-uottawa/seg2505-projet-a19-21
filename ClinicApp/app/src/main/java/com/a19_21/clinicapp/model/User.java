@@ -10,6 +10,8 @@ public class User {
     private String userId;
     private String type;
 
+    private String clinicID;
+
     // private int accountID; // get from Firebase
     //private TimeStamp creationDate;
 
@@ -19,7 +21,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.type = type;
-        // this.creationDate = get current time and store it
+        this.clinicID = "";
     }
 
     public User(){}
@@ -62,6 +64,14 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getClinicID() {
+        return clinicID;
+    }
+
+    public void setClinicID(String clinicID) {
+        this.clinicID = clinicID;
     }
 
     @NonNull

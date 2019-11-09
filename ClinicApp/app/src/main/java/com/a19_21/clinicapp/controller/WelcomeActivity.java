@@ -52,7 +52,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 if (user.getType().equals("Admin")) {
                     Intent goToAdmin = new Intent(WelcomeActivity.this, AdminActivity.class);
                     startActivity(goToAdmin);
-                // Sinon, il a le message Texte
+                    // Sinon, il a le message Texte
+                } else if (user.getType().equals("Employee")){
+                    Intent goToEmployee = new Intent(WelcomeActivity.this, EmployeeActivity.class);
+                    startActivity(goToEmployee);
                 } else {
                     greetingTxt.setText("Welcome "+user.getUsername()+", you're connected as "+user.getType());
                 }

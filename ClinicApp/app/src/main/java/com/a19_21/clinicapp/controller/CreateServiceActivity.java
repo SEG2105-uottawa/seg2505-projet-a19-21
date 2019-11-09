@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.a19_21.clinicapp.R;
 import com.a19_21.clinicapp.model.Clinic;
+import com.a19_21.clinicapp.model.Service;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -47,6 +48,9 @@ public class CreateServiceActivity extends AppCompatActivity {
 
         if(!TextUtils.isEmpty(name)) {
             String id = databaseServices.push().getKey();
+
+
+
 
         }
     }

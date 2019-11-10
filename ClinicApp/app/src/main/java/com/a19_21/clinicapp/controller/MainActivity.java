@@ -83,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void login() {
 
         String email = emailInput.getText().toString();

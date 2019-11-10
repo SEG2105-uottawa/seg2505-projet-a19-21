@@ -22,9 +22,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignInActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -87,12 +91,25 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+//email invalide
+    private final boolean isEmailValid(CharSequence email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+//mot de passe trop court
+    private final boolean isPasswordValid(CharSequence password){
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^.{5,}$";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+        return matcher.matches();
+    }
 
 
     private void signUp() {
 
-        String email = emailInput.getText().toString();
-        String password = passwordInput.getText().toString();
+        final String email = emailInput.getText().toString();
+        final String password = passwordInput.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -103,17 +120,18 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             addNewUser();
+                            isEmailValid(email);
+                            isPasswordValid(password);
                             Intent goToWelcome = new Intent(SignInActivity.this, WelcomeActivity.class);
                             startActivity(goToWelcome);
+
                         } else {
                             System.out.println("Enter Task NOT Successful");
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignInActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "Authentication failed: " + task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
-
-                        // Il faudrait faire un catch pour e-mail non valide et mot de passe trop court
                     }
                 });
 

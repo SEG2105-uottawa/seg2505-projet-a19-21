@@ -26,23 +26,23 @@
         android:id="@+id/activity_main_email_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email adress or username"
         android:layout_gravity="center"
-        android:gravity="center"
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="10dp"
-        />
+        android:gravity="center"
+        android:hint="Email adress or username"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/activity_main_password_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
         android:layout_gravity="center"
-        android:gravity="center"
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="10dp"
-        />
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:hint="Password" />
 
     <Button
         android:id="@+id/activity_main_login_btn"
@@ -68,11 +68,10 @@
         android:id="@+id/activity_main_sign_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="50dp"
-        android:text="Sign in"
         android:layout_gravity="center"
+        android:layout_marginHorizontal="50dp"
         android:gravity="center"
-        />
+        android:text="Sign up" />
 
 
 

@@ -56,14 +56,20 @@ public class CreateServiceActivity extends AppCompatActivity {
 
         if( !TextUtils.isEmpty(name) && !TextUtils.isEmpty(description)) {
             String id = databaseServices.push().getKey();
-            Service service = new Service(name, description);
+
+            Service service = new Service(id, name, description);
             databaseServices.child((id)).setValue(service);
 
+            Toast.makeText(this,"Service created",Toast.LENGTH_SHORT).show();
+
+            serviceNameInput.setText("");
+            serviceDescripInput.setText("");
 
         }
         else{
             Toast.makeText(this,"Field missing !",Toast.LENGTH_SHORT).show();
         }
+
     }
 }
 

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginTop="5dp"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        >
+
+        <TextView
+            android:id="@+id/list_service_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginHorizontal="10dp"
+            android:paddingTop="5dp"
+            android:text="Service"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/list_service_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginHorizontal="10dp"
+            android:paddingBottom="5dp"
+            android:text="Decscription"
+            android:textSize="18dp"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/list_service_edit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="Edit"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:width="150dp"
+        />
+
+    <Button
+        android:id="@+id/list_service_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:text="Delete"
+        android:layout_weight="1"
+        android:width="150dp"
+        />
+
+
+</LinearLayout>

@@ -9,11 +9,14 @@ public class Service {
 
     private Clinic[] clinicList;
 
-    public Service (String name, String description) {
+    public Service(String id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.fee = 0;
     }
+
+    public Service(){}
 
     public String getName() {
         return name;
@@ -49,6 +52,10 @@ public class Service {
 
     public Clinic[] getClinicList() {
         return clinicList;
+    }
+
+    public String toString() {
+        return ("Name : " + name + "  Description : " + description);
     }
 
 }

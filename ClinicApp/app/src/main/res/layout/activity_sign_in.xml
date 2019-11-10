@@ -38,6 +38,7 @@
         android:layout_marginVertical="10dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:inputType="text"
         android:hint="Username"
         />
 
@@ -49,7 +50,8 @@
         android:gravity="center"
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="10dp"
-        android:hint="Email adress"
+        android:inputType="textEmailAddress"
+        android:hint="Email address"
         />
 
     <EditText

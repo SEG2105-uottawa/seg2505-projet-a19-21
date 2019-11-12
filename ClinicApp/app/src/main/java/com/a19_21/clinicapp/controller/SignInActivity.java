@@ -37,6 +37,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
     private EditText usernameInput;
     private EditText emailInput;
     private EditText passwordInput;
+    private EditText passwordInput2;
     private Button createBtn;
 
     // Firebase Authentication
@@ -57,6 +58,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         usernameInput = (EditText) findViewById(R.id.activity_sign_username_input);
         emailInput = (EditText) findViewById(R.id.activity_sign_email_input);
         passwordInput = (EditText) findViewById(R.id.activity_sign_password_input);
+        passwordInput2 = (EditText) findViewById(R.id.activity_sign_password_input2);
         createBtn = (Button) findViewById(R.id.activity_sign_create_btn);
 
         // OBJECT FOR CHOOSING THE ACCOUNT TYPE
@@ -105,11 +107,11 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         return matcher.matches();
     }
 
-
     private void signUp() {
 
         final String email = emailInput.getText().toString();
         final String password = passwordInput.getText().toString();
+        final String confirmPassword = passwordInput2.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -142,19 +144,20 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         String username = usernameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
+        String confirmPassword = passwordInput.getText().toString();
         String userType = typeAccount.getSelectedItem().toString();
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPassword) && password == confirmPassword) {
             // Creates different account types
-            User user = new User(id, username, email, password, userType);
+            User user = new User(id, username, email, confirmPassword, userType);
             databaseUsers.child(id).setValue(user);
             return true;
 
         } else {
-            Toast.makeText(SignInActivity.this, "Information missing",
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignInActivity.this, "Information missing or passwords do not match.",
+                    Toast.LENGTH_LONG).show();
             return false;
         }
 

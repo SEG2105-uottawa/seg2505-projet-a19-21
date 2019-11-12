@@ -66,6 +66,18 @@
         android:hint="Password"
         />
 
+    <EditText
+        android:id="@+id/activity_sign_password_input2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
+        android:inputType="textPassword"
+        android:gravity="center"
+        android:hint=" Confirm password"
+         />
+
     <Button
         android:id="@+id/activity_sign_create_btn"
         android:layout_width="match_parent"

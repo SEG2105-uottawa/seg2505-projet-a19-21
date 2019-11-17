@@ -17,7 +17,7 @@
         android:id="@+id/activity_create_clinic_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
         android:id="@+id/activity_create_clinic_phone_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="phone" />
 
     <TextView
         android:layout_width="match_parent"
@@ -42,7 +42,7 @@
         android:id="@+id/activity_create_clinic_adress_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="text" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                     android:id="@+id/activity_create_clinic_city_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -91,7 +91,7 @@
                     android:id="@+id/activity_create_clinic_province_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:inputType="text" />
 
             </LinearLayout>
 
@@ -140,7 +140,7 @@
                     android:id="@+id/activity_create_clinic_zipcode_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:inputType="text" />
 
             </LinearLayout>
 

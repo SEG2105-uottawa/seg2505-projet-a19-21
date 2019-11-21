@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -52,7 +54,7 @@ public class EmployeeManageServicesActivity extends AppCompatActivity {
 
                 final Service service = serviceList.get(position);
 
-                final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(EmployeeManageServicesActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(EmployeeManageServicesActivity.this);
 
                 LayoutInflater inflater = EmployeeManageServicesActivity.this.getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.update_del_service_box, null);
@@ -66,10 +68,36 @@ public class EmployeeManageServicesActivity extends AppCompatActivity {
                 serviceDescription.setText(service.getDescription());
                 servicePrice.setText(Double.toString(service.getFee()));
 
+                serviceDescription.setText(service.getDescription());
 
-                builder.setTitle(service.getName())
-                        .create()
-                        .show();
+                updateBtn.setEnabled(true);
+
+                serviceDescription.addTextChangedListener(new TextWatcher() {
+                                                              @Override
+                                                              public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                                              }
+
+                                                              @Override
+                                                              public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                                  if(s.toString().trim().length()==0) {
+                                                                      updateBtn.setEnabled(false);
+                                                                  } else {
+                                                                      updateBtn.setEnabled(true);
+                                                                  }
+
+                                                              }
+
+                                                              @Override
+                                                              public void afterTextChanged(Editable s) {
+
+                                                              }
+                                                          });
+
+
+                        builder.setTitle(service.getName());
+                final AlertDialog b = builder.create();
+                b.show();
 
                 updateBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -84,7 +112,7 @@ public class EmployeeManageServicesActivity extends AppCompatActivity {
                         DatabaseReference ref = databaseServices.child(id);
 
                         ref.setValue(newService);
-
+                        b.dismiss();
                     }
                 });
 
@@ -96,6 +124,7 @@ public class EmployeeManageServicesActivity extends AppCompatActivity {
                         DatabaseReference ref = databaseServices.child(id);
 
                         ref.removeValue();
+                        b.dismiss();
                     }
                 });
             }

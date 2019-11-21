@@ -150,7 +150,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-        System.out.println("ENTER ADD NEW USER");
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPassword) && password.equals(confirmPassword)) {
             // Creates different account types
             User user = new User(id, username, email, password, userType);

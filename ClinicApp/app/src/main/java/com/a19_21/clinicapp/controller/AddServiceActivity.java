@@ -57,9 +57,10 @@ public class AddServiceActivity extends AppCompatActivity {
 
                 final Button addBtn = dialogView.findViewById(R.id.add_service_box_btn);
 
-                builder.setTitle(service.getName())
-                        .create()
-                        .show();
+                builder.setTitle(service.getName());
+
+                final AlertDialog b = builder.create();
+                b.show();
 
                 addBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -82,6 +83,8 @@ public class AddServiceActivity extends AppCompatActivity {
                             Service serviceCl = new Service(servID, service.getName(), description, fee);
 
                             refClinic.child(servID).setValue(serviceCl);
+
+                            b.dismiss();
 
                             Toast.makeText(AddServiceActivity.this, "Service added", Toast.LENGTH_SHORT).show();
 

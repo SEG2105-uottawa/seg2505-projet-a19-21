@@ -16,7 +16,7 @@
         />
 
     <EditText
-        android:id="@+id/activity_create_clinic_name_input"
+        android:id="@+id/activity_edit_clinic_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -32,21 +32,20 @@
 
 
     <EditText
-        android:id="@+id/activity_create_clinic_phone_input"
+        android:id="@+id/activity_edit_clinic_phone_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="15dp"
         />
 
-
     <Button
-        android:id="@+id/activity_create_clinic_create_btn"
+        android:id="@+id/activity_update_clinic_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
         android:layout_marginHorizontal="30dp"
-        android:text="Create a clinic"
+        android:text="Update"
         />
 
 

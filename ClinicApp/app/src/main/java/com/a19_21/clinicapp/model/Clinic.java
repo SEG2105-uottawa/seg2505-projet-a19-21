@@ -7,23 +7,27 @@ public class Clinic {
     private String clinicId;
     private String clinicName;
     private String phoneNumber;
-    private Time[] startHours = new Time[7];
-    private Time[] closeHours = new Time[7];
 
     private String selfEmployeeID;
     private String selfAdressID;
     //private rating;
 
 
-    private Service[] services;
-    private Review[] reviews;
+    private String services;
+    private String hours;
+    private String reviews;
 
 
     public Clinic(String id, String clinicName, String employeeID){
         this.clinicId = id;
         this.clinicName = clinicName;
         this.selfEmployeeID = employeeID;
+        this.services = "";
+        this.hours = "";
+        this.reviews = "";
     }
+
+    public Clinic() {}
 
     public String getClinicId() {
         return clinicId;
@@ -65,6 +69,8 @@ public class Clinic {
         this.selfEmployeeID = selfEmployeeID;
     }
 
+    /*
+
     // --------------------------- SET HOURS OF OPERATION --------------------------------- //
 
     public void setMondayHours(Time start, Time close) {
@@ -103,4 +109,6 @@ public class Clinic {
     }
 
     // -------------------------------------------------------------------------------------//
+
+     */
 }

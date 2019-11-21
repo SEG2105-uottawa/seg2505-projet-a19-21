@@ -42,11 +42,14 @@ public class WelcomeActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("user/"+firebaseUser.getUid());
 
+        System.out.print("ESSAI DATABASE REF : " + databaseReference);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 User user = dataSnapshot.getValue(User.class);
+                System.out.print("ESSAI USER : " + user);
 
                 // Si le user est un Admin, on l'envoie directement vers AdminActivity
                 if (user.getType().equals("Admin")) {

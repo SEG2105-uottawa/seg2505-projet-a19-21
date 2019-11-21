@@ -122,6 +122,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             addNewUser();
+                            System.out.println("CREATE USER WITH EMAIL");
                             isEmailValid(email);
                             isPasswordValid(password);
                             Intent goToWelcome = new Intent(SignInActivity.this, WelcomeActivity.class);
@@ -149,9 +150,12 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPassword) && password == confirmPassword) {
+        System.out.println("ENTER ADD NEW USER");
+
+        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPassword) && password.equals(confirmPassword)) {
             // Creates different account types
             User user = new User(id, username, email, confirmPassword, userType);
+            System.out.println("USER :" + user);
             databaseUsers.child(id).setValue(user);
             return true;
 

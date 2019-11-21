@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.a19_21.clinicapp.R;
-import com.a19_21.clinicapp.model.Adress;
 import com.a19_21.clinicapp.model.Clinic;
 import com.a19_21.clinicapp.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,11 +29,7 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
 
     private EditText newClinicName;
     private EditText clinicPhone;
-    private EditText clinicAdress;
-    private EditText clinicCity;
-    private EditText clinicProvince;
-    private Spinner clinicCountry;
-    private EditText clinicZipcode;
+
     private Button createBtn;
 
     // Firebase Database
@@ -42,12 +37,6 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
     DatabaseReference databaseUsers;
     DatabaseReference databaseClinics;
     DatabaseReference databaseAdresses;
-
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
-
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
 
 
 
@@ -58,27 +47,17 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
 
         newClinicName = (EditText) findViewById(R.id.activity_create_clinic_name_input);
         clinicPhone = (EditText) findViewById(R.id.activity_create_clinic_phone_input);
-        clinicAdress = (EditText) findViewById(R.id.activity_create_clinic_adress_input);
-        clinicCity = (EditText) findViewById(R.id.activity_create_clinic_city_input);
-        clinicProvince = (EditText) findViewById(R.id.activity_create_clinic_province_input);
-        clinicZipcode = (EditText) findViewById(R.id.activity_create_clinic_zipcode_input);
         createBtn = (Button) findViewById(R.id.activity_create_clinic_create_btn);
 
         databaseUsers = database.getReference("user");
         databaseClinics = database.getReference("clinic");
         databaseAdresses = database.getReference("adress");
 
-        clinicCountry = findViewById(R.id.activity_create_clinic_country_spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(CreateClinicActivity.this, R.array.countries, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        clinicCountry.setAdapter(adapter);
-
-        clinicCountry.setOnItemSelectedListener(CreateClinicActivity.this);
-
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createClinic();
+                finish();
             }
         });
 
@@ -104,11 +83,6 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
 
         // PAS ESSENTIEL
         String phone = clinicPhone.getText().toString().trim();
-        String adress = clinicAdress.getText().toString().trim();
-        String city = clinicCity.getText().toString().trim();
-        String province = clinicProvince.getText().toString().trim();
-        String zipcode = clinicZipcode.getText().toString().trim();
-        String country = clinicCountry.getSelectedItem().toString().trim();
 
         if(!TextUtils.isEmpty(name)) {
 
@@ -120,12 +94,7 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
                 clinic.setPhoneNumber(phone);
             }
 
-            createClinAdress(clinic, adress, city, province, zipcode, country);
-            associateClinicToEmployee(id);
-
             databaseClinics.child(id).setValue(clinic);
-
-
 
             Toast.makeText(this, "Clinic created ^^ !", Toast.LENGTH_SHORT).show();
         } else {
@@ -133,51 +102,4 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    public void createClinAdress(Clinic clinic, String adress, String city, String province, String zipcode, String country) {
-
-        if (!TextUtils.isEmpty(adress) && !TextUtils.isEmpty(city)) {
-
-            String adressId = databaseAdresses.push().getKey();
-
-            Adress clinAdress = new Adress(adressId, adress, city);
-
-            if (!TextUtils.isEmpty(province)) {
-                clinAdress.setProvince(province);
-            }
-            if (!TextUtils.isEmpty(zipcode)) {
-                clinAdress.setPostalCode(zipcode);
-            }
-            if (!TextUtils.isEmpty(country)) {
-                clinAdress.setCountry(country);
-            }
-            databaseAdresses.child(adressId).setValue(clinAdress);
-
-            clinic.setAdressID(adressId);
-        }
-    }
-
-
-    public void associateClinicToEmployee(String clinicID) {
-
-        final String userClinID = clinicID;
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("user/"+firebaseUser.getUid());
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                user.setClinicID(userClinID);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 }

@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.CreateClinicActivity"></activity>
+        <activity android:name=".controller.EmployeeManageServicesActivity"></activity>
+        <activity android:name=".controller.AddServiceActivity" />
+        <activity android:name=".controller.EditClinicActivity" />
+        <activity android:name=".controller.CreateClinicActivity" />
         <activity android:name=".controller.EmployeeActivity" />
         <activity android:name=".controller.ManageServicesActivity" />
         <activity android:name=".controller.ManageUsersActivity" />

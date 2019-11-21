@@ -36,7 +36,7 @@ public class UsersList extends ArrayAdapter<User> {
         TextView accountType = (TextView) listViewItem.findViewById(R.id.list_item_account_type);
         TextView email = (TextView) listViewItem.findViewById(R.id.list_item_email);
 
-        User user = userList.get(position); // Qu'est ce que ça fait ??
+        User user = userList.get(position);
 
         username.setText(user.getUsername());
         accountType.setText(user.getType());

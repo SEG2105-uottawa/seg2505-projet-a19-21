@@ -17,7 +17,7 @@
         android:id="@+id/update_service_box_name_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
         android:id="@+id/update_service_box_description_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:inputType="text" />
 
     <Button
         android:id="@+id/update_service_box_update_btn"

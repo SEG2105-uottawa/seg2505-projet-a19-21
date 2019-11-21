@@ -111,7 +111,6 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
 
         final String email = emailInput.getText().toString();
         final String password = passwordInput.getText().toString();
-        final String confirmPassword = passwordInput2.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -145,17 +144,16 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         String username = usernameInput.getText().toString();
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
-        String confirmPassword = passwordInput.getText().toString();
+        String confirmPassword = passwordInput2.getText().toString();
         String userType = typeAccount.getSelectedItem().toString();
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        System.out.println("ENTER ADD NEW USER");
 
+        System.out.println("ENTER ADD NEW USER");
         if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPassword) && password.equals(confirmPassword)) {
             // Creates different account types
-            User user = new User(id, username, email, confirmPassword, userType);
-            System.out.println("USER :" + user);
+            User user = new User(id, username, email, password, userType);
             databaseUsers.child(id).setValue(user);
             return true;
 

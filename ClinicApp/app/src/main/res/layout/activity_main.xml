@@ -29,10 +29,9 @@
         android:layout_gravity="center"
         android:layout_marginHorizontal="50dp"
         android:layout_marginVertical="10dp"
-        android:inputType="text"
         android:gravity="center"
-        android:hint="Email address or username"
-         />
+        android:hint="Email address "
+        android:inputType="text|textEmailAddress" />
 
     <EditText
         android:id="@+id/activity_main_password_input"

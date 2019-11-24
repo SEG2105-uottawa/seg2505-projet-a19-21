@@ -59,48 +59,10 @@ public class MainActivity extends AppCompatActivity {
         loginBtn = (Button) findViewById(R.id.activity_main_login_btn);
         createAccountTxt = (TextView) findViewById(R.id.activity_main_create_txt);
         signInBtn = (Button) findViewById(R.id.activity_main_sign_btn);
-
         loginBtn.setEnabled(false);
 
-        emailInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().trim().length()==0) {
-                    loginBtn.setEnabled(false);
-                } else {
-                    loginBtn.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        passwordInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.toString().trim().length()==0) {
-                    loginBtn.setEnabled(false);
-                } else {
-                    loginBtn.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        emailInput.addTextChangedListener(loginTextWatcher);
+        passwordInput.addTextChangedListener(loginTextWatcher);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -137,6 +99,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private TextWatcher loginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String email = emailInput.getText().toString().trim();
+            String passWord = passwordInput.getText().toString().trim();
+            loginBtn.setEnabled(!email.isEmpty() && !passWord.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
     private void login() {
 
         final String email = emailInput.getText().toString().trim();
@@ -148,8 +128,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "signInWithEmailAndPassword:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             isEmailValid(email);
                             isPasswordValid(password);
                             Intent goToWelcome = new Intent(MainActivity.this, WelcomeActivity.class);
@@ -165,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
 
     @Override
     public void onStart() {

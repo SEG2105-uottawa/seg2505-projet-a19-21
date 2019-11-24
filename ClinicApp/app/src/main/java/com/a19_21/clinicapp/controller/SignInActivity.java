@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -60,7 +62,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         passwordInput = (EditText) findViewById(R.id.activity_sign_password_input);
         passwordInput2 = (EditText) findViewById(R.id.activity_sign_password_input2);
         createBtn = (Button) findViewById(R.id.activity_sign_create_btn);
-
+        createBtn.setEnabled(false);
         // OBJECT FOR CHOOSING THE ACCOUNT TYPE
         typeAccount = findViewById(R.id.activity_sign_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignInActivity.this, R.array.typeAccountsArray, android.R.layout.simple_spinner_item);
@@ -77,10 +79,32 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                 signUp();
             }
         });
+        usernameInput.addTextChangedListener(signInTextWatcher);
+        emailInput.addTextChangedListener(signInTextWatcher);
+        passwordInput.addTextChangedListener(signInTextWatcher);
+        passwordInput2.addTextChangedListener(signInTextWatcher);
 
+        }
+        private TextWatcher signInTextWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
 
-    }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String username = usernameInput.getText().toString().trim();
+                String email = emailInput.getText().toString().trim();
+                String password = passwordInput.getText().toString().trim();
+                String password2 = passwordInput2.getText().toString().trim();
+                createBtn.setEnabled(!username.isEmpty()&& !email.isEmpty() && !password.isEmpty() && !password2.isEmpty());
+            }
+
+             @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
 
     // SHOW A TOAST MESSAGE TO CONFIRM THE CHOICE
     @Override
@@ -118,12 +142,12 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             addNewUser();
-                            System.out.println("CREATE USER WITH EMAIL");
                             isEmailValid(email);
                             isPasswordValid(password);
+                            Log.d(TAG, "createUserWithEmail:success");
+                            System.out.println("CREATE USER WITH EMAIL");
+                            FirebaseUser user = mAuth.getCurrentUser();
                             Intent goToWelcome = new Intent(SignInActivity.this, WelcomeActivity.class);
                             startActivity(goToWelcome);
 
@@ -146,21 +170,16 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         String password = passwordInput.getText().toString();
         String confirmPassword = passwordInput2.getText().toString();
         String userType = typeAccount.getSelectedItem().toString();
-
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-
-        if (!TextUtils.isEmpty(username) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(confirmPassword) && password.equals(confirmPassword)) {
+        if (password.equals(confirmPassword)) {
             // Creates different account types
             User user = new User(id, username, email, password, userType);
             databaseUsers.child(id).setValue(user);
             return true;
-
         } else {
-            Toast.makeText(SignInActivity.this, "Information missing or passwords do not match.",
+            Toast.makeText(SignInActivity.this, "Passwords do not match.",
                     Toast.LENGTH_LONG).show();
             return false;
         }
-
     }
 }

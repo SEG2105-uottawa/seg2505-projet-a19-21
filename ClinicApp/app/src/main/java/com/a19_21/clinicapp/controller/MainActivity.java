@@ -6,11 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
@@ -140,44 +139,30 @@ public class MainActivity extends AppCompatActivity {
 
     private void login() {
 
-        String email = emailInput.getText().toString().trim();
-        String password = passwordInput.getText().toString().trim();
+        final String email = emailInput.getText().toString().trim();
+        final String password = passwordInput.getText().toString().trim();
 
         // SIGN IN EXISTING USERS //
-        if (!email.isEmpty() && !password.isEmpty() && isValid(email)) {
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "signInWithEmailAndPassword:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            isEmailValid(email);
+                            isPasswordValid(password);
+                            Intent goToWelcome = new Intent(MainActivity.this, WelcomeActivity.class);
+                            startActivity(goToWelcome);
 
-            {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task)
-                {
-                    Log.d(TAG, " Vérification : signIn With Email : " + task.isSuccessful());
-                    //  If sign in succeeds i.e if task.isSuccessful(); returns true then the auth state listener will be notified and logic to handle the
-                    // signed in user can be handled in the listener.
-                    Intent intent = new Intent(MainActivity.this , WelcomeActivity.class);
-                    startActivity(intent);
-
-                    // If sign in fails, display a message to the user.
-                    if (!task.isSuccessful()) {
-                        try {
-                            throw task.getException();
-                        } catch (FirebaseAuthInvalidUserException e) {
-                            Log.e(TAG, e.getMessage());
-                        } catch (FirebaseAuthInvalidCredentialsException e) {
-                            Log.e(TAG, e.getMessage());
-                        } catch (FirebaseNetworkException e) {
-                            Log.e(TAG, e.getMessage());
-                        } catch (Exception e) {
-                            Log.e(TAG, e.getMessage());
+                        } else {
+                            System.out.println("Enter Task NOT Successful");
+                            Log.w(TAG, "signInWithEmailAndPassword:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed: " + task.getException().getMessage(),
+                                    Toast.LENGTH_LONG).show();
                         }
-
                     }
-                }
-
-            });
-        } else {
-            Toast.makeText(MainActivity.this, "Wrong email or password", Toast.LENGTH_SHORT).show();
-        }
+                });
 
     }
 
@@ -196,17 +181,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static boolean isValid(String email)
-    {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
-                "[a-zA-Z0-9_+&*-]+)*@" +
-                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                "A-Z]{2,7}$";
+    //email invalide
+    private final boolean isEmailValid(CharSequence email) {
+        return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
 
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null)
-            return false;
-        return pat.matcher(email).matches();
+    //mot de passe trop court
+    private final boolean isPasswordValid(CharSequence password){
+        Matcher matcher;
+        final String PASSWORD_PATTERN = "^.{5,}$";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+        return matcher.matches();
     }
 
 }

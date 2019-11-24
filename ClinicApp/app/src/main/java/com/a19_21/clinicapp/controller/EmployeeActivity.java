@@ -45,6 +45,7 @@ public class EmployeeActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

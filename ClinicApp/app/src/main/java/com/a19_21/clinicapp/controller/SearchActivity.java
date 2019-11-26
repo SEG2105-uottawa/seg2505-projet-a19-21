@@ -74,7 +74,7 @@ public class SearchActivity extends AppCompatActivity {
         patientRef = FirebaseDatabase.getInstance().getReference("user/" + firebaseUser.getUid());
         greetTxt = (TextView) findViewById(R.id.search_activity_greeting_txt);
 
-        // SET THE GREETING TEXT FOR EMPLOYEE
+        // SET THE GREETING TEXT FOR PATIENT
         patientRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

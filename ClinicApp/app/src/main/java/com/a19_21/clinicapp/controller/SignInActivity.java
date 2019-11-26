@@ -131,10 +131,19 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
         return matcher.matches();
     }
 
+    private final boolean matchingPasswords(CharSequence password, CharSequence confirmPassword){
+        Matcher matcher;
+        String password1 = password.toString();
+        Pattern pattern = Pattern.compile(password1);
+        matcher = pattern.matcher(confirmPassword);
+        return matcher.matches();
+    }
+
     private void signUp() {
 
         final String email = emailInput.getText().toString();
         final String password = passwordInput.getText().toString();
+        final String confirmPassword = passwordInput2.getText().toString();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -145,6 +154,7 @@ public class SignInActivity extends AppCompatActivity implements AdapterView.OnI
                             addNewUser();
                             isEmailValid(email);
                             isPasswordValid(password);
+                            matchingPasswords(password, confirmPassword);
                             Log.d(TAG, "createUserWithEmail:success");
                             System.out.println("CREATE USER WITH EMAIL");
                             FirebaseUser user = mAuth.getCurrentUser();

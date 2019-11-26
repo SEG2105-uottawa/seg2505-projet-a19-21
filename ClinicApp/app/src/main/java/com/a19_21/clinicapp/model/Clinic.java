@@ -1,6 +1,7 @@
 package com.a19_21.clinicapp.model;
 
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Clinic {
 
@@ -14,7 +15,7 @@ public class Clinic {
 
 
     private String services;
-    private String hours;
+    private ClinicHours hours;
     private String reviews;
 
 
@@ -23,7 +24,7 @@ public class Clinic {
         this.clinicName = clinicName;
         this.selfEmployeeID = employeeID;
         this.services = "";
-        this.hours = "";
+        this.hours = new ClinicHours();
         this.reviews = "";
     }
 
@@ -69,6 +70,13 @@ public class Clinic {
         this.selfEmployeeID = selfEmployeeID;
     }
 
+    public ClinicHours getHours() {
+        return hours;
+    }
+    public void setHours(ArrayList<String> start, ArrayList<String> end ){
+        hours.setStartTime(start);
+        hours.setEndTime(end);
+    }
     /*
 
     // --------------------------- SET HOURS OF OPERATION --------------------------------- //

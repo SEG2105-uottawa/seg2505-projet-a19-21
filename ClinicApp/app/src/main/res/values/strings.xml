@@ -5,7 +5,15 @@
         <item>Employee</item>
         <item>Patient</item>
     </string-array>
-
+    <string-array name="days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
     <string-array name="countries">
         <item>Maroc</item>
         <item>Canada</item>

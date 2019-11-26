@@ -166,6 +166,8 @@ public class EmployeeActivity extends AppCompatActivity {
         super.onStart();
 
         // DISPLAYS THE EMPLOYEE'S CLINIC
+
+        // Ajouter un Listener à la référence à la base de données
         databaseClinics.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -176,20 +178,31 @@ public class EmployeeActivity extends AppCompatActivity {
                 String employeeID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 clinicsList.clear();
 
+                // Loop à travers les objets enfants de cette référence
                 for(DataSnapshot clinicSnapshot : dataSnapshot.getChildren()) {
 
+                    // Les mettre dans un objet de type Clinic
                     Clinic clinic = clinicSnapshot.getValue(Clinic.class);
+
+
                     goToAddService.putExtra("clID", clinic.getClinicId());
                     goToManageServices.putExtra("clID",clinic.getClinicId());
 
+                    // Si la clinique appartient à l'employé
                     if (clinic.getEmployeeID().equals(employeeID)) {
+
+                        // Ajouter la clinique à ta liste de cliniques
                         clinicsList.add(clinic);
                     }
                     if(!clinicsList.isEmpty()) {
                         createClinicBtn.setEnabled(false);
                     }
                 }
+
+                // Créer une instance de ta classe liste (adapter pour Listview), et y ajouter la liste des cliniques que tu viens de fabriquer
                 ClinicsList adapter = new ClinicsList(EmployeeActivity.this, clinicsList);
+
+                // Attacher l'adapteur au listview défini dans onCreate
                 clinicsListView.setAdapter(adapter);
             }
 

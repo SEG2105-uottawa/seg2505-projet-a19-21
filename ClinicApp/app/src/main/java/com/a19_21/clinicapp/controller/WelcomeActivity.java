@@ -60,7 +60,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     Intent goToEmployee = new Intent(WelcomeActivity.this, EmployeeActivity.class);
                     startActivity(goToEmployee);
                 } else {
-                    greetingTxt.setText("Welcome "+user.getUsername()+", you're connected as "+user.getType());
+                    Intent goToSearch = new Intent(WelcomeActivity.this, SearchActivity.class);
+                    startActivity(goToSearch);
                 }
             }
 

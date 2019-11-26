@@ -14,7 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
-class timeSeachActivity extends AppCompatActivity {
+class TimeSeachActivity extends AppCompatActivity {
 
     private DatabaseReference databaseHours;
     private ListView openClinicListView;

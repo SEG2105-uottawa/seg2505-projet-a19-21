@@ -23,7 +23,7 @@ class timeSeachActivity extends AppCompatActivity {
     private CheckBox tuesday;
     private CheckBox wednesday;
     private CheckBox thursday;
-    private CheckBox friday;s
+    private CheckBox friday;
     private CheckBox saturday;
     private CheckBox sunday;
 

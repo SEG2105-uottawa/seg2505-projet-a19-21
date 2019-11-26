@@ -2,6 +2,7 @@ package com.a19_21.clinicapp.controller;
 
 import android.os.Bundle;
 import android.widget.CheckBox;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,20 +10,25 @@ import com.a19_21.clinicapp.R;
 import com.a19_21.clinicapp.model.Clinic;
 import com.a19_21.clinicapp.model.ClinicHours;
 import com.a19_21.clinicapp.model.ClinicsList;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
 class timeSeachActivity extends AppCompatActivity {
+
+    private DatabaseReference databaseHours;
+    private ListView openClinicListView;
+
     private CheckBox monday;
     private CheckBox tuesday;
     private CheckBox wednesday;
     private CheckBox thursday;
-    private CheckBox friday;
+    private CheckBox friday;s
     private CheckBox saturday;
     private CheckBox sunday;
 
 
-    List<Clinic> openClinic;
+    private List<Clinic> openClinic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +42,17 @@ class timeSeachActivity extends AppCompatActivity {
         saturday = (CheckBox) findViewById(R.id.saturday);
         sunday = (CheckBox) findViewById(R.id.sunday);
 
-        if (monday.isChecked()){
+        Clinic clinic;
 
-        /*
+        if (monday.isChecked()){
+            /*
+
             for(){
-                if(Clinic.ClinicHours.isOpen(0)){
-                    openClinic.add(Clinic)
+                if(clinic.getHours().isOpen(0)){
+                    openClinic.add(clinic);
                 }
             }
-            */
+           */
             //display clinics open on monday
         }
         if (tuesday.isChecked()){

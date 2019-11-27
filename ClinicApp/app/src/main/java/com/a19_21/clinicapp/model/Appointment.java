@@ -7,15 +7,17 @@ public class Appointment {
     private String id;
     private String clinic;
     private String service;
-    private Date date;
-    private Time time;
+    private String date;
+    private String time;
+    private String userId;
 
-    public Appointment(String id, String clinic, String service, Date date, Time time) {
+    public Appointment(String id, String clinic, String service, String date, String time, String userID) {
         this.id = id;
         this.clinic = clinic;
         this.service = service;
         this.date = date;
         this.time = time;
+        this.userId = userID;
     }
 
     public String getClinic() {
@@ -42,19 +44,19 @@ public class Appointment {
         this.service = service;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

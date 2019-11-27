@@ -90,7 +90,7 @@ public class SearchActivity extends AppCompatActivity {
         clinicsearchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent clinicSearch = new Intent(SearchActivity.this,clinicSeachActivity.class);
+                Intent clinicSearch = new Intent(SearchActivity.this, ClinicSearchActivity.class);
                 startActivity(clinicSearch);
             }
         });
@@ -106,7 +106,7 @@ public class SearchActivity extends AppCompatActivity {
         timesearchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent timeSearch = new Intent(SearchActivity.this, TimeSeachActivity.class);
+                Intent timeSearch = new Intent(SearchActivity.this, TimeSearchActivity.class);
                 startActivity(timeSearch);
             }
         });

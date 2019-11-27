@@ -1,8 +1,10 @@
 package com.a19_21.clinicapp.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class BookingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+        private Activity context;
+        private TextView serviceName;
+        private TextView serviceDescription;
+        private TextView serviceClinic;
+        private TextView servicePrice;
         private EditText date;
         private EditText time;
         private Button bookBtn;
@@ -64,6 +72,12 @@ public class BookingActivity extends AppCompatActivity implements AdapterView.On
             date = (EditText) findViewById(R.id.set_date);
             time = (EditText) findViewById(R.id.set_time);
             bookBtn = (Button) findViewById(R.id.bookbtn);
+            LayoutInflater inflater = context.getLayoutInflater();
+            View listViewItem = inflater.inflate(R.layout.search_service_item, null, true);
+            TextView serviceName = (TextView) listViewItem.findViewById(R.id.search_service_name);
+            TextView serviceDescription = (TextView) listViewItem.findViewById(R.id.search_service_description);
+            TextView serviceClinic = listViewItem.findViewById(R.id.search_service_clinic);
+            TextView servicePrice = listViewItem.findViewById(R.id.search_service_price);
 
             databaseUsers = database.getReference("user");
             databaseClinics = database.getReference("clinic");
@@ -95,8 +109,12 @@ public class BookingActivity extends AppCompatActivity implements AdapterView.On
 
             // Get user ID to associate him to booking
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+            String clinic = serviceClinic.getText().toString().trim();
+            String service = serviceName.getText().toString().trim();
             String bookDate = date.getText().toString().trim();
             String bookTime = time.getText().toString().trim();
+
 
             if(!TextUtils.isEmpty(bookDate) && !TextUtils.isEmpty(bookTime)) {
 

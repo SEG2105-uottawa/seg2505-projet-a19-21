@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.a19_21.clinicapp.R;
 import com.a19_21.clinicapp.model.Appointment;
+import com.a19_21.clinicapp.model.AppointmentsList;
 import com.a19_21.clinicapp.model.Service;
 import com.a19_21.clinicapp.model.ServicesList;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +28,7 @@ import java.util.List;
 public class AppointmentsActivity extends AppCompatActivity {
     private DatabaseReference databaseAppointments;
     private ListView appointmentsListView;
-    private List<Service> appointmentsList;
+    private List<Appointment> appointmentsList;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -52,7 +53,7 @@ public class AppointmentsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_services);
+        setContentView(R.layout.activity_appointments);
 
         databaseAppointments = FirebaseDatabase.getInstance().getReference("appointment");
 
@@ -76,7 +77,7 @@ public class AppointmentsActivity extends AppCompatActivity {
                     appointmentsList.add(appointment);
                 }
 
-                ServicesList adapter = new ServicesList(AppointmentsActivity.this, appointmentsList);
+                AppointmentsList adapter = new AppointmentsList(AppointmentsActivity.this, appointmentsList);
                 appointmentsListView.setAdapter(adapter);
 
             }

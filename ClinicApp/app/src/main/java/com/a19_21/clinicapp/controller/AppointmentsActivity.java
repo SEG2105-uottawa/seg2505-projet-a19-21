@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.a19_21.clinicapp.R;
+import com.a19_21.clinicapp.model.Appointment;
 import com.a19_21.clinicapp.model.Service;
 import com.a19_21.clinicapp.model.ServicesList;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,9 +71,9 @@ public class AppointmentsActivity extends AppCompatActivity {
 
                 appointmentsList.clear();
 
-                for (DataSnapshot servicesSnapshot : dataSnapshot.getChildren()) {
-                    Service service = servicesSnapshot.getValue(Service.class);
-                    appointmentsList.add(service);
+                for (DataSnapshot appointmentSnapshot : dataSnapshot.getChildren()) {
+                    Appointment appointment = appointmentSnapshot.getValue(Appointment.class);
+                    appointmentsList.add(appointment);
                 }
 
                 ServicesList adapter = new ServicesList(AppointmentsActivity.this, appointmentsList);

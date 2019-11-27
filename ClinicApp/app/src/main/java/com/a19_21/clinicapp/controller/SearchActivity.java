@@ -29,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
     private Button clinicsearchbtn;
     private Button servicesearchbtn ;
     private Button timesearchbtn;
+    private Button appointviewbtn;
     private TextView greetTxt;
 
     private DatabaseReference patientRef;
@@ -67,6 +68,7 @@ public class SearchActivity extends AppCompatActivity {
         clinicsearchbtn = (Button) findViewById(R.id.clinicsearchbtn);
         servicesearchbtn= (Button) findViewById(R.id.servicesearchbtn);
         timesearchbtn= (Button) findViewById(R.id.timesearchbtn);
+        appointviewbtn= (Button) findViewById(R.id.appointviewbtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
@@ -107,6 +109,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent timeSearch = new Intent(SearchActivity.this, TimeSearchActivity.class);
+                startActivity(timeSearch);
+            }
+        });
+        appointviewbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent timeSearch = new Intent(SearchActivity.this, AppointmentsActivity.class);
                 startActivity(timeSearch);
             }
         });

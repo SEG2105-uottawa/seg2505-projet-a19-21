@@ -10,13 +10,12 @@ public class Appointment {
     private Date date;
     private Time time;
 
-    private Clinic[] clinicList;
-
     public Appointment(String id, String clinic, String service, Date date, Time time) {
         this.id = id;
         this.clinic = clinic;
         this.service = service;
         this.date = date;
+        this.time = time;
     }
 
     public String getClinic() {

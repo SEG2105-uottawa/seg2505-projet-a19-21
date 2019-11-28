@@ -49,6 +49,13 @@ public class ServiceSearchList extends ArrayAdapter<Service> {
         serviceName.setText(service.getName());
         serviceDescription.setText(service.getDescription());
         servicePrice.setText("Price : " + service.getFee());
+        bookBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToBookings = new Intent(context, BookingActivity.class);
+                context.startActivity(goToBookings);
+            }
+        });
 
         return listViewItem;
     }

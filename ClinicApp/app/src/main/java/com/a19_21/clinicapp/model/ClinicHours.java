@@ -21,7 +21,7 @@ public class ClinicHours {
         this.endTime = endTime;
     }
 
-    public ArrayList<String> getStratTime(){
+    public ArrayList<String> getStartTime(){
         return this.startTime;
     }
 
@@ -38,7 +38,7 @@ public class ClinicHours {
     }
 
     public boolean isOpen(int day){
-        if(this.getStratTime().get(day).equals("--")){
+        if(this.getStartTime().get(day).equals("--")){
             return false;
         }
         return true;

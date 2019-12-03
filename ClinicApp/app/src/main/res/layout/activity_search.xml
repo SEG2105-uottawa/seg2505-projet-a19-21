@@ -27,6 +27,18 @@
         <TableRow
             android:layout_width="389dp"
             android:layout_height="158dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <TextView
+                android:id="@+id/activity_search_search_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Search" />
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
@@ -36,7 +48,7 @@
                 android:id="@+id/timesearchbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search per open hours" />
+                android:text="Search by hours of operation" />
         </TableRow>
 
         <TableRow
@@ -47,7 +59,7 @@
                 android:id="@+id/servicesearchbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search per services " />
+                android:text="Search by service " />
         </TableRow>
 
         <TableRow
@@ -58,7 +70,34 @@
                 android:id="@+id/clinicsearchbtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="search per clinic" />
+                android:text="search by clinic" />
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginVertical="20dp">
+            <TextView
+                android:id="@+id/activity_search_appointments_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:text="Appointments" />
+                <Button
+                    android:id="@+id/appointviewbtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="view bookings" />
+            </LinearLayout>
         </TableRow>
 
     </TableLayout>

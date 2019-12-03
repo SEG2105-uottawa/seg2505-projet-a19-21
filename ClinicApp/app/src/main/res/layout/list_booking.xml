@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="5dp"
+    android:layout_marginHorizontal="5dp"
+    >
+
+    <TextView
+        android:id="@+id/list_booking_clinic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginHorizontal="10dp"
+        android:paddingTop="5dp"
+        android:textSize="30dp"
+        android:text="Clinic"
+        />
+
+    <TextView
+        android:id="@+id/list_booking_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginHorizontal="10dp"
+        android:text="Service"
+        android:textSize="16dp"
+        android:textStyle="italic"
+        />
+
+    <TextView
+        android:id="@+id/list_booking_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginHorizontal="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="18dp"
+        android:text="Date"
+        />
+    <TextView
+        android:id="@+id/list_booking_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginHorizontal="10dp"
+        android:paddingBottom="5dp"
+        android:textSize="18dp"
+        android:text="Time"
+        />
+
+
+</LinearLayout>

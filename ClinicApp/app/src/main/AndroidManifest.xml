@@ -22,6 +22,8 @@
         <activity android:name=".controller.SearchActivity" />
         <activity android:name=".controller.WelcomeActivity" />
         <activity android:name=".controller.SignInActivity" />
+        <activity android:name=".controller.TimeSearchActivity" />
+        <activity android:name=".controller.ClinicSearchActivity" />
         <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

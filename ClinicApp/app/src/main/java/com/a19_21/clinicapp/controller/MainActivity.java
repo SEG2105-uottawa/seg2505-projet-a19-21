@@ -159,12 +159,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //email invalide
-    private final boolean isEmailValid(CharSequence email) {
+    public static final boolean isEmailValid(CharSequence email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     //mot de passe trop court
-    private final boolean isPasswordValid(CharSequence password){
+    public static final boolean isPasswordValid(CharSequence password){
         Matcher matcher;
         final String PASSWORD_PATTERN = "^.{5,}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);

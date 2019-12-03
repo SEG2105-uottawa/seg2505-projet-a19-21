@@ -41,7 +41,7 @@ public class ServiceListEmployee extends ArrayAdapter<Service> {
 
         serviceName.setText(service.getName());
         serviceDescription.setText(service.getDescription());
-        servicePrice.setText(Double.toString(service.getFee()));
+        servicePrice.setText("Fee : " + Double.toString(service.getFee()));
 
         return listViewItem;
     }

@@ -72,6 +72,16 @@ public class CreateClinicActivity extends AppCompatActivity implements AdapterVi
         clinicPhone = (EditText) findViewById(R.id.activity_create_clinic_phone_input);
         createBtn = (Button) findViewById(R.id.activity_create_clinic_create_btn);
 
+        /*
+        typeAccount = findViewById(R.id.activity_sign_type_spinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(SignInActivity.this, R.array.typeAccountsArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeAccount.setAdapter(adapter);
+
+        typeAccount.setOnItemSelectedListener(SignInActivity.this);
+         */
+
         databaseUsers = database.getReference("user");
         databaseClinics = database.getReference("clinic");
         databaseAdresses = database.getReference("adress");

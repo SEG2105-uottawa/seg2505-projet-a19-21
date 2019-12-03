@@ -1,0 +1,15 @@
+Groupe A19 - 21 : Mariam Hammoud, Haifa Besrour, Shravan Vryas, Rebecca Mamane
+
+GitHub : https://github.com/SEG2105-uottawa/seg2505-projet-a19-21
+
+Compte Admin : 
+	e-mail : admin01@gmail.com
+	password : admin001
+
+Compte Employé :
+	e-mail : empl03@mail.com
+	password : employeee003
+
+Compte Patient :
+	e-mail : pat@mail.com
+	password : 098765

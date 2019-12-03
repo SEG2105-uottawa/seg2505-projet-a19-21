@@ -19,7 +19,7 @@
         <activity android:name=".controller.ManageUsersActivity" />
         <activity android:name=".controller.CreateServiceActivity" />
         <activity android:name=".controller.AdminActivity" />
-        <activity android:name=".controller.SearchActivity"/>
+        <activity android:name=".controller.SearchActivity" />
         <activity android:name=".controller.WelcomeActivity" />
         <activity android:name=".controller.SignInActivity" />
         <activity android:name=".controller.MainActivity">

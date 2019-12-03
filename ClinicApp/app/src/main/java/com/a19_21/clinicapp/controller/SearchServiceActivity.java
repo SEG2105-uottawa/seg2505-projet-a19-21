@@ -1,12 +1,20 @@
 package com.a19_21.clinicapp.controller;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.a19_21.clinicapp.R;
 import com.a19_21.clinicapp.model.Clinic;
@@ -54,6 +62,36 @@ public class SearchServiceActivity extends AppCompatActivity {
                 adapter.getFilter().filter(newText);
 
                 return false;
+            }
+        });
+
+        serviceSearchListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Service service = serviceSearchList.get(position);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(SearchServiceActivity.this);
+
+                LayoutInflater inflater = SearchServiceActivity.this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.see_service_box, null);
+                builder.setView(dialogView);
+
+                TextView serviceDescription = dialogView.findViewById(R.id.see_service_description);
+                TextView servicePrice = dialogView.findViewById(R.id.see_service_price);
+                Button appointment = dialogView.findViewById(R.id.see_service_appointment_btn);
+
+                serviceDescription.setText(service.getDescription());
+                servicePrice.setText(Double.toString(service.getFee()));
+
+                builder.setTitle(service.getName());
+
+                appointment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // INTENT POUR ADD APPOINTMENT
+                        // PUT EXTRA
+                    }
+                });
             }
         });
 
